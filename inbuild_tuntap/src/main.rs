@@ -1,6 +1,6 @@
 use std::io;
 use std::net::Ipv4Addr;
-use std::process::{Command, Stdio};
+use std::process::Command;
 use tun_tap::{Iface, Mode};
 
 // Function to create a TUN/TAP interface
@@ -9,7 +9,7 @@ fn create_tun_interface(name: &str) -> io::Result<Iface> {
 }
 
 // Function to configure the IP address and bring up the interface
-fn configure_interface(interface: &Iface, ip_addr: Ipv4Addr, subnet_mask: Ipv4Addr) -> io::Result<()> {
+fn configure_interface(interface: &Iface, ip_addr: Ipv4Addr, _subnet_mask: Ipv4Addr) -> io::Result<()> {
     // Configure IP address
     Command::new("ip")
         .args(&["addr", "add", &format!("{}/24", ip_addr), "dev", &interface.name()])
